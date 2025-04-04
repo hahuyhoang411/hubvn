@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="cart-button" id="cartButton">
+        🛒
+        <span class="cart-count" id="cartCount" style="display: none;">0</span>
+    </button>
+    
+    <div class="product-container">
+        <h1>Chi Tiết Sản Phẩm</h1>
+        <div class="product-card">
+            <div class="product-nav">
+                <button class="nav-button" id="prevProduct">←</button>
+                <button class="nav-button" id="nextProduct">→</button>
+            </div>
+            <h2 class="product-title" id="productTitle">iPhone 15 Pro Max</h2>
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009279096" 
+                 alt="iPhone 15 Pro Max" 
+                 class="product-image"
+                 id="productImage">
+            <p class="product-description" id="productDescription">
+                iPhone 15 Pro Max với chip A17 Pro, màn hình Super Retina XDR 6.7 inch,
+                camera 48MP và thiết kế titan cao cấp.
+            </p>
+            <p class="product-price" id="productPrice">Giá: 34.999.000₫</p>
+            <a href="https://cellphones.com.vn/iphone-15-pro-max.html" class="product-link" id="productLink" target="_blank">Xem chi tiết</a>
+            <button class="add-to-cart" id="addToCart">Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+    
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Giỏ hàng</h2>
+            <ul id="cartItems"></ul>
+            <button class="close-cart" id="closeCart">Đóng</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+<div class="filter-container">
+    <select id="priceFilter" class="filter-select">
+        <option value="all">Tất cả giá</option>
+        <option value="under-20">Dưới 20 triệu</option>
+        <option value="20-30">20 - 30 triệu</option>
+        <option value="over-30">Trên 30 triệu</option>
+    </select>
+</div>
