@@ -1,0 +1,63 @@
+# Bài tập thực hành 1.1: thực cơ bản của lập trình web
+
+## Tổng Quan
+[Prompt: "Tạo trang web bán điện thoại tập trung vào 1 sản phẩm chính, hỗ trợ tiếng Việt và {toàn bộ yêu cầu đề bài}"]
+- Trang web tập trung hiển thị 1 sản phẩm chính
+- Giao diện tiếng Việt
+
+## Tính Năng Chính
+1. Hiển Thị Sản Phẩm:
+   [Prompt: "Thêm card sản phẩm với hình ảnh, tên, mô tả, giá và nút điều hướng"]
+   - Tập trung vào sản phẩm
+   - Hình ảnh, tên, mô tả và giá sản phẩm
+   - Nút điều hướng sản phẩm (← →)
+   - Liên kết "Xem chi tiết" đến trang sản phẩm
+
+2. Hệ Thống Giỏ Hàng:
+   [Prompt: "Thêm giỏ hàng với biểu tượng 🛒 và đếm số lượng. Trong giỏ hàng có 2 nút thanh toán để kết thúc giao dịch và đóng để thoát ra"]
+   - Nút giỏ hàng với bộ đếm (🛒)
+   - Popup hiển thị nội dung giỏ hàng
+   - Chức năng thêm vào giỏ hàng
+   - Nút thanh toán và đóng
+
+3. Bộ Lọc Giá:
+   [Prompt: "Tạo dropdown lọc theo khoảng giá VND"]
+   - Lọc theo khoảng giá với các tùy chọn:
+     - Tất cả giá
+     - Dưới 20 triệu
+     - 20 - 30 triệu
+     - Trên 30 triệu
+
+## Thành Phần Giao Diện
+- Header:
+  - Nút giỏ hàng với bộ đếm
+
+- Nội Dung Chính:
+  - Card sản phẩm bao gồm:
+    - Điều khiển điều hướng
+    - Hình ảnh sản phẩm
+    - Tên và mô tả
+    - Hiển thị giá
+    - Các nút hành động
+
+- Phần Lọc:
+  - Dropdown chọn khoảng giá
+
+- Popup Giỏ Hàng:
+  - Danh sách sản phẩm trong giỏ
+  - Nút thanh toán và đóng
+
+## Triển Khai Kỹ Thuật
+[Prompt gốc: "Cấu trúc HTML5 với file CSS và JS riêng"]
+- Cấu trúc HTML5
+- Styling bằng style.css
+- Chức năng JavaScript bằng script.js
+- Liên kết sản phẩm mở trong tab mới
+
+## Ý Tưởng Phát Triển Thêm
+1. Hiển thị nhiều sản phẩm/dạng gallery
+2. Hệ thống tài khoản người dùng
+3. Chức năng tìm kiếm sản phẩm
+4. Danh mục sản phẩm
+5. Phần đánh giá khách hàng
+6. Tích hợp cổng thanh toán
