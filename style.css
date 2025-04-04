@@ -231,3 +231,24 @@ h1 {
     border-color: #0071e3;
     box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
 }
+
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.checkout-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
