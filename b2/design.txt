@@ -1,0 +1,36 @@
+**Tài liệu Thiết kế: Vẽ Dinh Độc Lập (Logo) Canvas**
+
+**Prompt 1:**
+Tôi muốn vẽ Dinh Độc Lập theo hình dạng đơn giản hóa, sử dụng HTML5 Canvas, với màu sắc chủ đạo là vàng gold, thể hiện được các đặc trưng kiến trúc cơ bản của công trình này. Sử dụng hình vẽ sau để làm tài liệu tham khảo và phác hoạ lại.
+
+**Prompt 2:**
+Tôi muốn thêm 1 vài chi tiết trông cho Dinh sống động hơn. Bạn có thể thêm sân vườn như hình ảnh sau được không. Nhớ làm có tính xa gần.
+
+**1. Phân tích:**
+
+*   Đối tượng: Dinh Độc Lập, TP.HCM.
+*   Phong cách: Đơn giản hóa, hình học, đối xứng, đơn sắc (vàng gold).
+*   Thành phần chính: Khối nhà ngang, mái bằng có phần trung tâm nhô cao, ngôi sao trên đỉnh, nhiều cột/ô dọc lặp lại, phần đế, chữ "DINH ĐỘC LẬP".
+
+**2. Chiến lược Vẽ trên Canvas:**
+
+*   **Công cụ:** HTML5 Canvas 2D Context.
+*   **Phương pháp:**
+    *   Sử dụng `fillRect()` cho các khối chính (nền, thân, mái).
+    *   Tận dụng đối xứng: Tính toán tọa độ dựa trên tâm (`canvas.width / 2`).
+    *   Sử dụng vòng lặp `for` để vẽ các yếu tố lặp lại (cột/ô dọc). Chiến lược là vẽ khối thân màu vàng, sau đó vẽ các hình chữ nhật màu trắng (màu nền) lên trên để tạo hiệu ứng cột/khoảng trống.
+    *   Tạo hàm `drawStar()` riêng để vẽ ngôi sao 5 cánh bằng đường dẫn (`beginPath`, `moveTo`, `lineTo`).
+    *   Sử dụng `fillText()` để vẽ văn bản, căn giữa (`textAlign = 'center'`).
+*   **Màu sắc:** Sử dụng chủ yếu màu vàng gold (`#DAA520`) và màu trắng (`white`) cho các khoảng trống.
+*   **Đơn giản hóa:** Bỏ qua hiệu ứng bóng đổ của logo. Số lượng và chi tiết các cột/ô dọc được ước lượng, không cần chính xác tuyệt đối như logo nhưng phải đảm bảo tính nhịp điệu và đối xứng.
+
+**3. Thành phần và Phương thức dự kiến:**
+
+*   **Nền móng:** `fillRect()`
+*   **Thân nhà (khối vàng):** `fillRect()`
+*   **Mái chính:** `fillRect()` (có tính độ đua ra `roofOverhang`)
+*   **Mái trung tâm:** `fillRect()` (cao hơn mái chính)
+*   **Cột/Khoảng trống:** Vòng lặp `for` kết hợp `fillRect()` (vẽ màu trắng lên thân vàng).
+*   **Ngôi sao:** Hàm `drawStar()` (sử dụng `beginPath`, `moveTo`, `lineTo`, `fill`).
+*   **Chữ:** `fillText()`, `fillStyle`, `font`, `textAlign`.
+
