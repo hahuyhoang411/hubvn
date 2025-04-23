@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedResearch AI Chat - Mockup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Thanh bên (Sidebar) -->
+        <aside class="sidebar">
+            <button id="new-chat-btn">Cuộc trò chuyện mới</button>
+            <input type="text" id="search-history" placeholder="Tìm kiếm lịch sử...">
+            <ul id="chat-history-list">
+                <li>Cuộc trò chuyện 1</li>
+                <li>Nghiên cứu về XYZ</li>
+                <li>Hỏi đáp về ABC</li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#">Cài đặt</a>
+                <a href="#">Tài khoản</a>
+                <a href="#">Trợ giúp</a>
+            </div>
+        </aside>
+
+        <!-- Khu vực Chat chính -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <h2 id="chat-title">Cuộc trò chuyện mới</h2>
+            </header>
+            <div class="message-list" id="message-list">
+                <!-- Tin nhắn sẽ được thêm vào đây bằng JavaScript -->
+                 <div class="message ai">Chào bạn! Tôi có thể giúp gì cho bạn hôm nay?</div>
+            </div>
+            <div class="chat-input-area">
+                <textarea id="message-input" placeholder="Nhập câu hỏi hoặc yêu cầu của bạn..."></textarea>
+                <button id="send-btn">Gửi</button>
+                <button id="upload-btn">Tải lên</button>
+            </div>
+             <div id="loading-indicator" style="display: none;">AI đang xử lý...</div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
