@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery - Pinterest Style</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo_gallery.png" alt="Logo" height="40">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm hình ảnh...">
+            <button>Tìm</button>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <ul>
+            <li><a href="#" class="active" data-category="all">All</a></li>
+            <li><a href="#" data-category="desert">Desert</a></li>
+            <li><a href="#" data-category="flower">Flower</a></li>
+            <li><a href="#" data-category="moutain">Mountain</a></li>
+            <li><a href="#" data-category="sea">Sea</a></li>
+        </ul>
+    </nav>
+
+    <main class="gallery-container">
+        <div class="gallery">
+            <!-- Các mục ảnh sẽ được thêm vào đây -->
+            <div class="gallery-item" data-category="desert">
+                <img src="images/desert/desert.jpg" alt="Ảnh sa mạc cằn cỗi dưới ánh nắng">
+                <div class="item-info">
+                    <p>Sa mạc nắng cháy</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="flower">
+                <img src="images/flower/flower.jpg" alt="Bông hoa hướng dương vàng rực">
+                 <div class="item-info">
+                    <p>Hoa hướng dương</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="flower">
+                <img src="images/flower/flower2.jpg" alt="Cánh đồng hoa oải hương tím biếc">
+                 <div class="item-info">
+                    <p>Đồng hoa oải hương</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+             <div class="gallery-item" data-category="flower">
+                <img src="images/flower/flower3.jpg" alt="Bông hoa cúc trắng tinh khôi">
+                 <div class="item-info">
+                    <p>Hoa cúc trắng</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+             <div class="gallery-item" data-category="moutain">
+                <img src="images/moutain/moutain.jpg" alt="Dãy núi hùng vĩ phủ tuyết trắng">
+                 <div class="item-info">
+                    <p>Núi tuyết hùng vĩ</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+             <div class="gallery-item" data-category="moutain">
+                <img src="images/moutain/moutain2.jpg" alt="Ngọn núi xanh mướt dưới ánh bình minh">
+                 <div class="item-info">
+                    <p>Bình minh trên núi</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="moutain">
+                <img src="images/moutain/moutain3.jpg" alt="Con đường mòn dẫn lên đỉnh núi">
+                 <div class="item-info">
+                    <p>Đường lên đỉnh núi</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="sea">
+                <img src="images/sea/sea.jpg" alt="Bãi biển trong xanh với cát trắng">
+                 <div class="item-info">
+                    <p>Biển xanh cát trắng</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="sea">
+                <img src="images/sea/sea2.jpg" alt="Hoàng hôn rực rỡ trên mặt biển">
+                 <div class="item-info">
+                    <p>Hoàng hôn trên biển</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="sea">
+                <img src="images/sea/sea3.jpg" alt="Con thuyền nhỏ neo đậu gần bờ biển">
+                 <div class="item-info">
+                    <p>Thuyền và biển</p>
+                    <button class="save-btn">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

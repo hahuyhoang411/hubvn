@@ -1,0 +1,418 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    position: sticky; /* Giữ header cố định khi cuộn */
+    top: 0;
+    z-index: 10;
+}
+
+.search-bar input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #e60023; /* Màu đỏ Pinterest */
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #ad081b;
+}
+
+.gallery-container {
+    padding: 20px;
+}
+
+.gallery {
+    /* Sử dụng Flexbox cho bố cục đơn giản ban đầu */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Khoảng cách giữa các ảnh */
+    /* justify-content: center; /* Bỏ căn giữa để căn trái mặc định */
+
+    /* --- Tùy chọn: Sử dụng CSS Grid cho bố cục kiểu Masonry --- */
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-auto-rows: 10px; /* Điều chỉnh để phù hợp với ảnh */
+    /* gap: 15px; */
+}
+
+.gallery-item {
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài */
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    break-inside: avoid; /* Quan trọng cho bố cục Masonry nếu dùng Grid */
+    /* width: 230px; /* Bỏ chiều rộng cố định */
+    width: calc(33.333% - 10px); /* 3 cột, trừ đi khoảng cách (15px * 2 / 3) */
+    margin-bottom: 15px; /* Thêm khoảng cách dưới nếu cần */
+    box-sizing: border-box; /* Đảm bảo padding/border không làm tăng kích thước */
+    /* --- Cần cho CSS Grid Masonry --- */
+    /* grid-row-end: span 2; /* Giá trị này cần tính toán dựa trên chiều cao ảnh */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Thêm transition cho hiệu ứng ẩn/hiện */
+}
+
+/* Class để ẩn item */
+.gallery-item.hidden {
+    display: none; /* Cách đơn giản nhất */
+    /* Hoặc hiệu ứng mượt hơn: */
+    /* opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; */
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto; /* Giữ tỷ lệ khung hình */
+    border-radius: 16px 16px 0 0; /* Bo góc trên */
+}
+
+.gallery-item .item-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Lớp phủ mờ khi hover */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đẩy nút Lưu xuống dưới */
+    align-items: flex-end; /* Đặt nút Lưu ở góc phải */
+    padding: 10px;
+    opacity: 0; /* Ẩn ban đầu */
+    transition: opacity 0.3s ease;
+    box-sizing: border-box;
+    border-radius: 16px; /* Bo góc cho lớp phủ */
+}
+
+ .gallery-item .item-info p {
+    align-self: flex-start; /* Tiêu đề ở góc trái */
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+ }
+
+
+.gallery-item:hover .item-info {
+    opacity: 1; /* Hiện khi hover */
+}
+
+.save-btn {
+    background-color: #e60023;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background-color: #ad081b;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) { /* Điều chỉnh breakpoint nếu cần */
+    .gallery-item {
+         width: calc(50% - 8px); /* 2 cột trên tablet, điều chỉnh gap */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-bar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .search-bar input {
+        width: calc(100% - 80px); /* Điều chỉnh cho vừa nút */
+    }
+    .gallery {
+         /* Điều chỉnh cột cho màn hình nhỏ hơn nếu dùng Grid */
+        /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+        gap: 10px;
+    }
+    /* Giữ 2 cột trên mobile nhỏ hơn */
+     .gallery-item {
+         width: calc(50% - 5px); /* 2 cột, điều chỉnh gap */
+     }
+}
+
+ @media (max-width: 480px) {
+     .gallery-item {
+         width: 100%; /* 1 cột trên mobile nhỏ */
+         margin-bottom: 10px;
+     }
+ }
+
+/* Category Navigation Styles */
+.category-nav {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align items horizontally */
+    gap: 20px; /* Space between items */
+}
+
+.category-nav li {
+    display: inline-block; /* Needed for white-space nowrap */
+}
+
+.category-nav a {
+    text-decoration: none;
+    color: #767676; /* Grey color like the image */
+    font-weight: 500;
+    padding: 8px 0; /* Padding top/bottom */
+    border-bottom: 2px solid transparent; /* Placeholder for active border */
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+.category-nav a:hover {
+    color: #111111; /* Darker color on hover */
+}
+
+.category-nav a.active {
+    color: #111111; /* Active link color */
+    border-bottom-color: #111111; /* Active link underline */
+}
+
+/* Responsive adjustments for category nav if needed */
+@media (max-width: 768px) {
+    .category-nav {
+        padding: 10px 15px; /* Slightly less padding */
+    }
+    .category-nav ul {
+        gap: 15px; /* Less gap */
+    }
+}
+
+
+/* /* imagesloaded.pkgd.min.js`: Thư viện này giúp đảm bảo tất cả hình ảnh đã được tải xong và có kích thước đúng trước khi Masonry tính toán bố cục. Điều này rất quan trọng để tránh các item bị chồng chéo. */
+/* *   `masonry.pkgd.min.js`: Thư viện Masonry chính. */
+
+/* **2. Cập nhật `style.css`:** */
+
+/* Để Masonry hoạt động tốt và các item tự điều chỉnh kích thước theo ảnh, chúng ta cần bỏ đi `width` cố định hoặc `calc()` trong `.gallery-item` và để Masonry tự quyết định vị trí. */
+
+.gallery {
+    /* Bỏ display: flex hoặc display: grid đi, Masonry sẽ xử lý */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    gap: 15px; /* Masonry có thể sử dụng gutter, nhưng để gap ở đây cũng không sao */
+    /* justify-content: center; */
+    /* Cần position relative để Masonry định vị item tuyệt đối bên trong */
+    position: relative;
+    margin: 0 auto; /* Căn giữa gallery nếu muốn */
+}
+
+.gallery-item {
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative; /* Giữ nguyên cho item-info */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* width: calc(33.333% - 10px); /* Bỏ width % */
+    width: 15.5%; /* Thử nghiệm với % để có 6 cột (100% / 6 cột = 16.66%, trừ đi gap) */
+    /* Hoặc đặt width cố định nếu muốn kiểm soát chặt chẽ hơn, ví dụ: */
+    /* width: 220px; */
+    margin-bottom: 15px; /* Masonry sẽ quản lý khoảng cách dọc tốt hơn */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Class để ẩn item (giữ nguyên) */
+.gallery-item.hidden {
+     display: none; /* Đơn giản nhất và thường hoạt động tốt với layout() */
+}
+
+
+.gallery-item img {
+    display: block; /* Quan trọng */
+    width: 100%;   /* Quan trọng */
+    height: auto;  /* Quan trọng */
+    border-radius: 16px 16px 0 0;
+}
+
+
+/* Responsive: Bỏ các width % trong media query cho .gallery-item */
+@media (max-width: 992px) {
+    .gallery-item {
+         /* width: calc(50% - 8px); */ /* Bỏ đi */
+         /* Có thể đặt lại width cố định khác cho màn hình nhỏ hơn nếu cần */
+         width: 23%; /* Ví dụ: 4 cột */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-bar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .search-bar input {
+        width: calc(100% - 80px); /* Điều chỉnh cho vừa nút */
+    }
+    .gallery {
+        gap: 10px;
+    }
+     .gallery-item {
+         /* width: calc(50% - 5px); */ /* Bỏ đi */
+         width: 31%; /* Ví dụ: 3 cột */
+     }
+}
+
+ @media (max-width: 480px) {
+     .gallery-item {
+         /* width: 100%; */ /* Bỏ đi */
+         width: 48%; /* Ví dụ: 2 cột */
+         margin-bottom: 10px;
+     }
+ }
+
+
+.gallery-item img {
+    display: block; /* Quan trọng */
+    width: 100%;   /* Quan trọng */
+    height: auto;  /* Quan trọng */
+    border-radius: 16px 16px 0 0;
+}
+
+
+/* Responsive: Bỏ các width % trong media query cho .gallery-item */
+@media (max-width: 992px) {
+    .gallery-item {
+         /* width: calc(50% - 8px); */ /* Bỏ đi */
+         width: 200px; /* Có thể điều chỉnh columnWidth cho màn hình nhỏ hơn */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-bar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .search-bar input {
+        width: calc(100% - 80px); /* Điều chỉnh cho vừa nút */
+    }
+    .gallery {
+        gap: 10px;
+    }
+     .gallery-item {
+         /* width: calc(50% - 5px); */ /* Bỏ đi */
+         width: 180px; /* Có thể điều chỉnh columnWidth */
+         margin-bottom: 10px;
+     }
+}
+
+ @media (max-width: 480px) {
+     .gallery-item {
+         /* width: 100%; */ /* Bỏ đi */
+         width: calc(100% - 20px); /* Ví dụ: 1 cột trên mobile, trừ padding container */
+         /* Hoặc giữ width nhỏ hơn nếu muốn hiệu ứng masonry rõ hơn */
+         /* width: 150px; */
+         margin-bottom: 10px;
+     }
+     .gallery {
+         padding: 0 10px; /* Thêm padding cho container gallery */
+     }
+ }
+
+/* Category Navigation Styles */
+.category-nav {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align items horizontally */
+    gap: 20px; /* Space between items */
+}
+
+.category-nav li {
+    display: inline-block; /* Needed for white-space nowrap */
+}
+
+.category-nav a {
+    text-decoration: none;
+    color: #767676; /* Grey color like the image */
+    font-weight: 500;
+    padding: 8px 0; /* Padding top/bottom */
+    border-bottom: 2px solid transparent; /* Placeholder for active border */
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+.category-nav a:hover {
+    color: #111111; /* Darker color on hover */
+}
+
+.category-nav a.active {
+    color: #111111; /* Active link color */
+    border-bottom-color: #111111; /* Active link underline */
+}
+
+/* Responsive adjustments for category nav if needed */
+@media (max-width: 768px) {
+    .category-nav {
+        padding: 10px 15px; /* Slightly less padding */
+    }
+    .category-nav ul {
+        gap: 15px; /* Less gap */
+    }
+}
+
+.hidden {
+    display: none;
+}
