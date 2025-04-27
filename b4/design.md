@@ -83,4 +83,4 @@
 
 ## 6. Video Demo
 
-*   **Link video:** [Dán link video demo của bạn vào đây]
+*   **Link video:** https://drive.google.com/file/d/1lGXMw2tYvc0oGM2p6XEMkNjLqdCCRS0m/view?usp=drive_link
