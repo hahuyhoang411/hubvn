@@ -2,7 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.querySelector('.gallery');
     const galleryItems = gallery.querySelectorAll('.gallery-item'); // Lấy tất cả item ban đầu
     const categoryLinks = document.querySelectorAll('.category-nav a');
-    const searchInput = document.getElementById('searchInput'); // Giả sử input có id="searchInput"
+    const searchInput = document.querySelector('.search-bar input'); // Corrected selector
+
+    // New elements for image generation
+    const imagePromptInput = document.getElementById('imagePromptInput');
+    const generateImageBtn = document.getElementById('generateImageBtn');
 
     let msnry; // Khai báo msnry ở scope rộng hơn
 
@@ -174,5 +178,106 @@ document.addEventListener('DOMContentLoaded', function() {
              console.log(`Đã click vào ảnh: ${imageSrc || 'Không tìm thấy ảnh'}`);
          });
     });
+
+    // --- Event listener for Image Generation Button ---
+    if (generateImageBtn && imagePromptInput) {
+        generateImageBtn.addEventListener('click', async function() {
+            const prompt = imagePromptInput.value.trim();
+            if (!prompt) {
+                alert('Please enter a prompt to generate an image.');
+                return;
+            }
+
+            // Visual feedback: disable button, show loading state (optional)
+            generateImageBtn.disabled = true;
+            generateImageBtn.textContent = 'Generating...';
+
+            try {
+                console.log(`Sending prompt to backend: ${prompt}`);
+                const response = await fetch('/api/generate-image', { // No need for http://localhost:3000 if served from same origin
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: prompt }),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || !data.success) {
+                    console.error('Backend error:', data.error, data.details || '');
+                    alert(`Error generating image: ${data.error || 'Unknown error from server'}`);
+                    throw new Error(data.error || 'Image generation failed on server');
+                }
+
+                console.log('Received from backend:', data.prompt, `Image size (base64): ${data.imageBase64 ? data.imageBase64.length : 0}`);
+
+                if (data.imageBase64) {
+                    const newImageSrc = `data:image/png;base64,${data.imageBase64}`;
+                    const newItem = document.createElement('div');
+                    newItem.classList.add('gallery-item');
+                    // You might want a specific category or way to identify generated images
+                    newItem.setAttribute('data-category', 'generated'); 
+                    
+                    const img = document.createElement('img');
+                    img.src = newImageSrc;
+                    img.alt = data.prompt; // Use the returned prompt for alt text
+
+                    const itemInfo = document.createElement('div');
+                    itemInfo.classList.add('item-info');
+                    const p = document.createElement('p');
+                    p.textContent = data.prompt; // Use the returned prompt for the caption
+                    const saveBtn = document.createElement('button');
+                    saveBtn.classList.add('save-btn');
+                    saveBtn.textContent = 'Lưu';
+
+                    // Add event listener for the new save button
+                    saveBtn.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        alert(`Đã lưu ảnh: ${data.prompt}`);
+                    });
+
+                    itemInfo.appendChild(p);
+                    itemInfo.appendChild(saveBtn);
+                    newItem.appendChild(img);
+                    newItem.appendChild(itemInfo);
+
+                    // Add click listener for the new item itself (like other gallery items)
+                    newItem.addEventListener('click', () => {
+                        console.log(`Đã click vào ảnh: ${data.prompt}`);
+                    });
+
+                    gallery.appendChild(newItem);
+                    // Add to the original galleryItems collection for filtering if needed (though it might be better to re-query)
+                    // galleryItems = gallery.querySelectorAll('.gallery-item'); 
+
+                    if (msnry) {
+                        // Ensure the image is loaded before Masonry tries to lay it out
+                        imagesLoaded(newItem, function() {
+                            msnry.appended(newItem);
+                            msnry.layout();
+                            console.log('Masonry layout updated for new generated item.');
+                        });
+                    } else {
+                        console.error('Masonry instance (msnry) not available to append new item.');
+                    }
+                    imagePromptInput.value = ''; // Clear the prompt input
+                } else {
+                    alert('Image generation succeeded but no image data received.');
+                }
+
+            } catch (error) {
+                console.error('Error during image generation process:', error);
+                alert(`Failed to generate image. ${error.message}`);
+            } finally {
+                // Re-enable button
+                generateImageBtn.disabled = false;
+                generateImageBtn.textContent = 'Generate Image';
+            }
+        });
+    } else {
+        if (!imagePromptInput) console.warn('Image prompt input not found.');
+        if (!generateImageBtn) console.warn('Generate image button not found.');
+    }
 
 });
